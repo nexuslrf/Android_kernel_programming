@@ -1,0 +1,113 @@
+#include<linux/module.h>
+#include<linux/kernel.h>
+#include<linux/init.h>
+#include<linux/sched.h>
+#include<linux/unistd.h>
+#include<linux/list.h>
+#include<linux/string.h>
+#include<linux/syscalls.h>
+#include<linux/slab.h>          // for memory allocation
+#include<linux/uaccess.h>       // for copy to user
+
+MODULE_LICENSE("Dual BSD/GPL");
+
+#define __NR_ptree 287
+
+
+struct prinfo 
+{
+    pid_t parent_pid; /* process id of parent */
+    pid_t pid;   /* process id */
+    pid_t first_child_pid; /* pid of youngest child */
+    pid_t next_sibling_pid; /* pid of older sibling */
+    long state;  /* current state of process */
+    long uid;   /* user id of process owner */
+    char comm[64];   /* name of program excuted */
+    int level;  /* to identify the hierarchy of a process*/
+};
+int nr_tmp;
+void DFS(struct task_struct *entry,struct prinfo *buf,int level)
+{
+    struct task_struct *sibling_ptr=NULL, *child_ptr=NULL;
+    struct prinfo *proc_ptr;
+    struct list_head *item;
+    if(entry == NULL)
+        return;
+    proc_ptr = buf+nr_tmp;
+    nr_tmp++;
+  /*  // copying
+    proc_ptr->level = level;
+    proc_ptr->pid = entry->pid;
+    proc_ptr->state = entry->state;
+    proc_ptr->uid = entry->cred->uid;
+    get_task_comm(proc_ptr->comm, entry);*/
+
+    if(list_empty(&entry->children))
+	child_ptr=NULL;
+        //proc_ptr->first_child_pid=0;
+    else
+    {
+        child_ptr = list_entry((&entry->children)->next, struct task_struct, sibling);
+/*
+        if(child_ptr != NULL)
+            proc_ptr->first_child_pid = child_ptr->pid;
+        else
+            proc_ptr->first_child_pid = 0;*/
+    }
+
+    if(list_empty(&entry->sibling))
+	sibling_ptr = NULL;
+        //proc_ptr->next_sibling_pid=0;
+    else
+    {
+        sibling_ptr = list_entry((&entry->sibling)->next, struct task_struct, sibling);
+        /*if(sibling_ptr != NULL&&sibling_ptr != entry)  // no sibling will point to parent.
+            proc_ptr->next_sibling_pid = sibling_ptr->pid;
+        else
+            proc_ptr->next_sibling_pid = 0;*/
+    }
+/*
+    printk("Copy~ comm: %s, pid: %d, ppid: %d, uid: %ld\n", proc_ptr->comm,
+        proc_ptr->pid,proc_ptr->parent_pid,proc_ptr->uid);
+    if (!list_empty(&entry->children))
+        list_for_each(item, &entry->children)
+        {
+            child_ptr = list_entry(item, struct task_struct, sibling);
+            DFS(child_ptr,buf,level+1);
+        }*/
+    DFS(child_ptr,buf,level+1);
+    DFS(sibling_ptr,buf,level);
+}
+
+
+
+static int (*oldcall)(void);
+static int ptree(struct prinfo *buf, int *nr)
+{
+    nr_tmp = 0;
+    printk("Constructing!\n");
+    // To copy processes info to buf by DFS.
+    read_lock(&tasklist_lock);
+    DFS(&init_task,buf,0);
+    read_unlock(&tasklist_lock);
+    printk("Complete ptree!\n");
+    *nr = nr_tmp;
+    return 0;
+}
+static int addsyscall_init(void)
+{
+    long *syscall = (long*)0xc000d8c4;
+    oldcall = (int(*)(void))(syscall[__NR_ptree]);
+    syscall[__NR_ptree] = (unsigned long) ptree;
+    printk(KERN_INFO "module load!\n");
+    return 0;
+}
+
+static void addsyscall_exit(void)
+{
+    long *syscall = (long*) 0xc000d8c4;
+    syscall[__NR_ptree] = (unsigned long) oldcall;
+    printk(KERN_INFO "module exit!\n");
+}
+module_init(addsyscall_init);
+module_exit(addsyscall_exit);
