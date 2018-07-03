@@ -76,15 +76,15 @@ Besides, we also write a program `wrr_info` by using syscall `sched_getscheduler
 
 We randomly select an APP in Android emulator and run it. By typing `ps -P | grep [APP's name]`,  we can get sufficient information for `set_sched` . After running `set_sched`, we can get the information from kernel message like fig below.  Apparently, the target task has switched to WRR schedule policy. 
 
-![kernel1](/Users/nexuslrf/Onedrive/CS_Courses/OperatingSystems/Projects/Project2/report/kernel1.png)
+![kernel1](kernel1.png)
 
 If we further run `wrr_info`, we will get the following information. The task is in foreground with timeslice 100ms.
 
-![shell1](/Users/nexuslrf/Onedrive/CS_Courses/OperatingSystems/Projects/Project2/report/shell1.png)
+![shell1](shell1.png)
 
 Then we click home button in emulator, to see how kernel information changes. In figure below, we can see the state of this task changes to background and time slice also changes to background timeslice: 10ms.
 
-![kernel2](/Users/nexuslrf/Onedrive/CS_Courses/OperatingSystems/Projects/Project2/report/kernel2.png)
+![kernel2](kernel2.png)
 
 ## Obstacles
 
@@ -114,15 +114,15 @@ After writing the normal WRR scheduler, I take a easy method to support SMP load
 
 After finishing these modification, I start to build my kernel and load it onto my tablet. This process follows the tutorial from [packtpub](https://hub.packtpub.com/customizing-kernel-and-boot-sequence/) and [stackexchange](https://android.stackexchange.com/questions/69954/how-to-unpack-and-edit-boot-img-for-rom-porting). Then the tablet will run my own kernel.
 
-![buildkl](/Users/nexuslrf/Onedrive/CS_Courses/OperatingSystems/Projects/Project2/report/buildkl.png)
+![buildkl](buildkl.png)
 
 By doing some normal tests, I find that WRR scheduler works fine for this real device. Next, I test how it works for SMP case.
 
 This time, I write a dummy program which runs a meaningless`while` loop. I run 8 dummy programs at the same time (If I run more, my device is too busy to deal with them).
 
-![dummy1](/Users/nexuslrf/Onedrive/CS_Courses/OperatingSystems/Projects/Project2/report/SMP_$$.png)
+![dummy1](SMP_$$.png)
 
-![smp1](/Users/nexuslrf/Onedrive/CS_Courses/OperatingSystems/Projects/Project2/report/SMP_4.png)
+![smp1](SMP_4.png)
 
 As you can see these 4 dummy programs run in different CPUs at the same time, which shows my load balance policy works.
 
