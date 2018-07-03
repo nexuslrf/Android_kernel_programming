@@ -1,0 +1,160 @@
+root@generic:/ # cd data/local/tmp                                             
+root@generic:/data/local/tmp # ls                                              
+myProcARM
+ptree.ko
+ptreeARM
+root@generic:/data/local/tmp # insmod ptree.ko
+root@generic:/data/local/tmp # lsmod
+Module                  Size  Used by
+ptree                 921590  0 
+root@generic:/data/local/tmp # ./ptreeARM                                      
+There are 72 processes.
+swapper, 0, 0, 0, 1, 0, 0
+    init, 1, 1, 0, 45, 2, 0
+        ueventd, 45, 1, 0, 0, 62, 0
+        logd, 62, 1, 0, 0, 63, 1036
+        vold, 63, 1, 0, 0, 71, 0
+        healthd, 71, 1, 0, 0, 72, 0
+        lmkd, 72, 1, 0, 0, 73, 0
+        servicemanager, 73, 1, 0, 0, 74, 1000
+        surfaceflinger, 74, 1, 0, 0, 77, 1000
+        qemud, 77, 1, 0, 0, 80, 0
+        sh, 80, 1, 0, 0, 81, 2000
+        adbd, 81, 1, 0, 296, 82, 0
+            sh, 296, 1, 0, 1157, 1, 0
+                ptreeARM, 1157, 0, 0, 0, 1, 0
+        netd, 82, 1, 0, 0, 83, 0
+        debuggerd, 83, 1, 0, 0, 84, 0
+        rild, 84, 1, 0, 0, 85, 1001
+        drmserver, 85, 1, 0, 0, 86, 1019
+        mediaserver, 86, 1, 0, 0, 87, 1013
+        installd, 87, 1, 0, 0, 88, 0
+        keystore, 88, 1, 0, 0, 89, 1017
+        main, 89, 1, 0, 263, 90, 0
+            system_server, 263, 1, 0, 0, 667, 1000
+            ndroid.systemui, 667, 1, 0, 0, 693, 10013
+            putmethod.latin, 693, 1, 0, 0, 708, 10032
+            m.android.phone, 708, 1, 0, 0, 720, 1001
+            droid.launcher3, 720, 1, 0, 0, 743, 10007
+            d.process.acore, 743, 1, 0, 0, 786, 10002
+            externalstorage, 786, 1, 0, 0, 808, 10006
+            m.android.music, 808, 1, 0, 0, 834, 10035
+            d.process.media, 834, 1, 0, 0, 884, 10005
+            id.printspooler, 884, 1, 0, 0, 932, 10040
+            droid.deskclock, 932, 1, 0, 0, 956, 10023
+            .quicksearchbox, 956, 1, 0, 0, 982, 10042
+            .android.dialer, 982, 1, 0, 0, 996, 10004
+            ndroid.keychain, 996, 1, 0, 0, 1013, 1000
+            viders.calendar, 1013, 1, 0, 0, 1029, 10001
+            gedprovisioning, 1029, 1, 0, 0, 1048, 10008
+            ndroid.calendar, 1048, 1, 0, 0, 1072, 10019
+            m.android.email, 1072, 1, 0, 0, 1087, 10027
+            ndroid.exchange, 1087, 1, 0, 0, 1108, 10029
+            ndroid.settings, 1108, 1, 0, 0, 1, 1000
+        gatekeeperd, 90, 1, 0, 0, 91, 1000
+        perfprofd, 91, 1, 0, 0, 92, 0
+        fingerprintd, 92, 1, 0, 0, 1, 1000
+    kthreadd, 2, 1, 0, 3, 0, 0
+        ksoftirqd/0, 3, 1, 0, 0, 6, 0
+        khelper, 6, 1, 0, 0, 7, 0
+        sync_supers, 7, 1, 0, 0, 8, 0
+        bdi-default, 8, 1, 0, 0, 9, 0
+        kblockd, 9, 1, 0, 0, 10, 0
+        rpciod, 10, 1, 0, 0, 11, 0
+        kworker/0:1, 11, 1, 0, 0, 12, 0
+        kswapd0, 12, 1, 0, 0, 13, 0
+        fsnotify_mark, 13, 1, 0, 0, 14, 0
+        crypto, 14, 1, 0, 0, 25, 0
+        kworker/u:1, 25, 1, 0, 0, 30, 0
+        mtdblock0, 30, 1, 0, 0, 35, 0
+        mtdblock1, 35, 1, 0, 0, 40, 0
+        mtdblock2, 40, 1, 0, 0, 41, 0
+        binder, 41, 1, 0, 0, 42, 0
+        deferwq, 42, 1, 0, 0, 43, 0
+        kworker/u:2, 43, 1, 0, 0, 44, 0
+        mmcqd/0, 44, 1, 0, 0, 47, 0
+        jbd2/mtdblock0-, 47, 1, 0, 0, 48, 0
+        ext4-dio-unwrit, 48, 1, 0, 0, 53, 0
+        kworker/0:2, 53, 1, 0, 0, 54, 0
+        jbd2/mtdblock1-, 54, 1, 0, 0, 55, 0
+        ext4-dio-unwrit, 55, 1, 0, 0, 60, 0
+        jbd2/mtdblock2-, 60, 1, 0, 0, 61, 0
+        ext4-dio-unwrit, 61, 1, 0, 0, 69, 0
+        kauditd, 69, 1, 0, 0, 0, 0
+root@generic:/data/local/tmp # ./myProcARM                                     
+516030910383_Parent 1158
+516030910383_Child 1159
+There are 73 processes.
+swapper, 0, 0, 0, 1, 0, 0
+    init, 1, 1, 0, 45, 2, 0
+        ueventd, 45, 1, 0, 0, 62, 0
+        logd, 62, 1, 0, 0, 63, 1036
+        vold, 63, 1, 0, 0, 71, 0
+        healthd, 71, 1, 0, 0, 72, 0
+        lmkd, 72, 1, 0, 0, 73, 0
+        servicemanager, 73, 1, 0, 0, 74, 1000
+        surfaceflinger, 74, 1, 0, 0, 77, 1000
+        qemud, 77, 1, 0, 0, 80, 0
+        sh, 80, 1, 0, 0, 81, 2000
+        adbd, 81, 1, 0, 296, 82, 0
+            sh, 296, 1, 0, 1158, 1, 0
+                myProcARM, 1158, 1, 0, 1159, 1, 0
+                    ptreeARM, 1159, 0, 0, 0, 1, 0
+        netd, 82, 1, 0, 0, 83, 0
+        debuggerd, 83, 1, 0, 0, 84, 0
+        rild, 84, 1, 0, 0, 85, 1001
+        drmserver, 85, 1, 0, 0, 86, 1019
+        mediaserver, 86, 1, 0, 0, 87, 1013
+        installd, 87, 1, 0, 0, 88, 0
+        keystore, 88, 1, 0, 0, 89, 1017
+        main, 89, 1, 0, 263, 90, 0
+            system_server, 263, 1, 0, 0, 667, 1000
+            ndroid.systemui, 667, 1, 0, 0, 693, 10013
+            putmethod.latin, 693, 1, 0, 0, 708, 10032
+            m.android.phone, 708, 1, 0, 0, 720, 1001
+            droid.launcher3, 720, 1, 0, 0, 743, 10007
+            d.process.acore, 743, 1, 0, 0, 786, 10002
+            externalstorage, 786, 1, 0, 0, 808, 10006
+            m.android.music, 808, 1, 0, 0, 834, 10035
+            d.process.media, 834, 1, 0, 0, 884, 10005
+            id.printspooler, 884, 1, 0, 0, 932, 10040
+            droid.deskclock, 932, 1, 0, 0, 956, 10023
+            .quicksearchbox, 956, 1, 0, 0, 982, 10042
+            .android.dialer, 982, 1, 0, 0, 996, 10004
+            ndroid.keychain, 996, 1, 0, 0, 1013, 1000
+            viders.calendar, 1013, 1, 0, 0, 1029, 10001
+            gedprovisioning, 1029, 1, 0, 0, 1048, 10008
+            ndroid.calendar, 1048, 1, 0, 0, 1072, 10019
+            m.android.email, 1072, 1, 0, 0, 1087, 10027
+            ndroid.exchange, 1087, 1, 0, 0, 1108, 10029
+            ndroid.settings, 1108, 1, 0, 0, 1, 1000
+        gatekeeperd, 90, 1, 0, 0, 91, 1000
+        perfprofd, 91, 1, 0, 0, 92, 0
+        fingerprintd, 92, 1, 0, 0, 1, 1000
+    kthreadd, 2, 1, 0, 3, 0, 0
+        ksoftirqd/0, 3, 1, 0, 0, 6, 0
+        khelper, 6, 1, 0, 0, 7, 0
+        sync_supers, 7, 1, 0, 0, 8, 0
+        bdi-default, 8, 1, 0, 0, 9, 0
+        kblockd, 9, 1, 0, 0, 10, 0
+        rpciod, 10, 1, 0, 0, 11, 0
+        kworker/0:1, 11, 1, 0, 0, 12, 0
+        kswapd0, 12, 1, 0, 0, 13, 0
+        fsnotify_mark, 13, 1, 0, 0, 14, 0
+        crypto, 14, 1, 0, 0, 25, 0
+        kworker/u:1, 25, 1, 0, 0, 30, 0
+        mtdblock0, 30, 1, 0, 0, 35, 0
+        mtdblock1, 35, 1, 0, 0, 40, 0
+        mtdblock2, 40, 1, 0, 0, 41, 0
+        binder, 41, 1, 0, 0, 42, 0
+        deferwq, 42, 1, 0, 0, 43, 0
+        kworker/u:2, 43, 1, 0, 0, 44, 0
+        mmcqd/0, 44, 1, 0, 0, 47, 0
+        jbd2/mtdblock0-, 47, 1, 0, 0, 48, 0
+        ext4-dio-unwrit, 48, 1, 0, 0, 53, 0
+        kworker/0:2, 53, 1, 0, 0, 54, 0
+        jbd2/mtdblock1-, 54, 1, 0, 0, 55, 0
+        ext4-dio-unwrit, 55, 1, 0, 0, 60, 0
+        jbd2/mtdblock2-, 60, 1, 0, 0, 61, 0
+        ext4-dio-unwrit, 61, 1, 0, 0, 69, 0
+        kauditd, 69, 1, 0, 0, 0, 0
